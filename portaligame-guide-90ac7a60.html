@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再访 · 爱游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f7fafc;
+            color: #1a2634;
+            line-height: 1.7;
+            padding: 2rem 1.25rem;
+        }
+
+        .page-wrap {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        /* 网格卡片式背景纹理 —— 极浅网格 */
+        .card-grid-bg {
+            position: relative;
+        }
+
+        .card-grid-bg::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 150, 136, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 150, 136, 0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-grid-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 文章主体卡片 */
+        .post-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.2rem 1.8rem;
+            box-shadow: 0 8px 24px rgba(0, 64, 48, 0.06), 0 2px 8px rgba(0, 30, 20, 0.02);
+            transition: box-shadow 0.25s ease;
+            margin-bottom: 2rem;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 14px 36px rgba(0, 110, 90, 0.08);
+        }
+
+        /* 标题区 —— 干净、留有呼吸感 */
+        .article-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2ece8;
+            padding-bottom: 1.2rem;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 550;
+            letter-spacing: -0.01em;
+            color: #0a2b25;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title small {
+            font-size: 1.2rem;
+            font-weight: 350;
+            color: #4d6a62;
+            margin-left: 0.35rem;
+        }
+
+        .subhead {
+            font-size: 1.05rem;
+            color: #47645b;
+            margin-top: 0.25rem;
+            font-style: normal;
+            border-left: 3px solid #009688;
+            padding-left: 1rem;
+        }
+
+        /* 正文段落 */
+        .post-body p {
+            margin-bottom: 1.3rem;
+            font-size: 1rem;
+            color: #20312b;
+        }
+
+        .post-body p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* 引用提示块 */
+        .note-tip {
+            background: #e4f0ec;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 4px solid #009688;
+            font-size: 0.97rem;
+            color: #19453b;
+        }
+
+        .note-tip strong {
+            font-weight: 550;
+            color: #00695c;
+        }
+
+        .note-tip a {
+            color: #00695c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+        }
+
+        .note-tip a:hover {
+            color: #004d40;
+            text-decoration-color: #004d40;
+        }
+
+        /* 收藏与再访卡片 —— 内嵌卡片效果 */
+        .revisit-box {
+            background: #f0f7f4;
+            border-radius: 24px;
+            padding: 1.6rem 1.6rem 1.8rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .revisit-box h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #145a4b;
+            margin-bottom: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .revisit-box h3::before {
+            content: "⋮⋮";
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            color: #009688;
+            opacity: 0.7;
+        }
+
+        .revisit-box p {
+            color: #1d3e36;
+            margin-bottom: 0.8rem;
+        }
+
+        .revisit-box .bookmark-note {
+            background: white;
+            border-radius: 16px;
+            padding: 0.9rem 1.2rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+            border: 1px solid #cdded7;
+            color: #264d42;
+        }
+
+        /* FAQ 摘要风格 */
+        .faq-mini {
+            margin: 2.2rem 0 0.8rem;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2ece8;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 530;
+            color: #0f3d33;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-a {
+            color: #3b5f55;
+            font-size: 0.95rem;
+        }
+
+        .faq-a a {
+            color: #00695c;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 访问句 —— 结尾处 */
+        .visit-closing {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px dashed #bcd0c8;
+            color: #2d5b4f;
+        }
+
+        .visit-closing a {
+            color: #00695c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 450;
+        }
+
+        .visit-closing a:hover {
+            color: #003d32;
+        }
+
+        /* 微交互 */
+        .meta-note {
+            color: #5c7b71;
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+        }
+
+        /* 移动端友好 */
+        @media (max-width: 540px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+
+            .post-card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 24px;
+            }
+
+            .article-title {
+                font-size: 1.65rem;
+            }
+
+            .subhead {
+                font-size: 0.95rem;
+                padding-left: 0.7rem;
+            }
+
+            .revisit-box {
+                padding: 1.2rem;
+            }
+
+            .note-tip {
+                padding: 1rem 1.1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .article-title {
+                font-size: 1.4rem;
+            }
+
+            .post-body p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body class="card-grid-bg">
+    <div class="page-wrap">
+        <article class="post-card">
+
+            <div class="article-header">
+                <h1 class="article-title">
+                    再访的理由<small>· 收藏与持续</small>
+                </h1>
+                <div class="subhead">
+                    不是每个站点都值得第二次打开，但有些地方值得留在书签栏。
+                </div>
+            </div>
+
+            <div class="post-body">
+
+                <p>
+                    年初整理浏览器书签的时候，发现很多链接早已失效，或者变成了完全认不出的页面。但有一个条目，从第一次打开后就一直留着——没有刻意去记，却会在某个想找点安静内容的傍晚再次点开。那个地方叫<a href="https://portaligame.com">爱游戏</a>，名字很直接，气质却很收敛。
+                </p>
+
+                <p>
+                    后来我留意到，很多人和我一样，不是通过搜索偶然撞见，而是被人推荐、或者从某篇讨论帖里顺藤摸瓜找过去。然后，他们就再也没有删掉那个标签页。没什么花哨的弹窗，也没有催促注册的横幅，就像一个老友的阁楼，你想什么时候上去翻翻都行。
+                </p>
+
+                <!-- 引用提示 -->
+                <div class="note-tip">
+                    <strong>一个小观察</strong> · 那些真正让人反复回来的站点，往往不是因为它推送得有多勤快，而是它提供的某种东西——也许是信息，也许是氛围——恰好是你一直需要、但别处很难找到的。<a href="https://portaligame.com">爱游戏</a>就属于这一类。
+                </div>
+
+                <p>
+                    大约是去年秋天，我把它的链接从「常用」移到了收藏栏的「常驻」文件夹。区别在于，常用是每周都要点开，常驻是你知道它会一直在那儿，节奏由自己定。后来换过一次浏览器，导出书签时发现唯独这个链接我在新浏览器里第一时间重新收藏了。没有犹豫。
+                </p>
+
+                <!-- 收藏与再次访问卡片 -->
+                <div class="revisit-box">
+                    <h3>收藏夹里的坐标</h3>
+                    <p>
+                        如果你也是那种会把页面留在后台标签栏好几天的人，或许会理解这种感受：有些网站你不需要每天上去，但只要它还在，就觉得安心。
+                    </p>
+                    <div class="bookmark-note">
+                        ⚡ 书签栏不一定要塞满，但总得有几个位置留给那些「隔一段时间上去看看，总能有新收获」的地方。
+                    </div>
+                </div>
+
+                <p>
+                    上周又上去了一次。发现界面做了一些细微调整，导航更清爽了，内容更新的节奏依旧是那种「不打扰但持续」的步调。没有突然弹出的评分邀请，也没有“你多久没来了”的提醒。它好像根本不在乎你是否记得回来，但你偏偏就没忘。
+                </p>
+
+                <p>
+                    也许这就是持续关注的本质：不是靠提醒或推送，而是靠一种内在的引力。你不必刻意安排时间去，只是某个下午，咖啡还烫着，光标移到了收藏夹，然后你点开了那个熟悉的名称。
+                </p>
+
+                <!-- FAQ 摘要式内容 -->
+                <div class="faq-mini">
+                    <div class="faq-item">
+                        <div class="faq-q">—— 为什么值得再次收藏？</div>
+                        <div class="faq-a">因为它的更新稳定，内容有辨识度，没有多余的噪音。详情可参考 <a href="https://portaligame.com">爱游戏</a> 本身的风格。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">—— 怎样保持不遗忘？</div>
+                        <div class="faq-a">放一个书签，或者在心里留一个位置。好的站点不需要刷存在感，但值得你偶尔回去看看。</div>
+                    </div>
+                </div>
+
+                <!-- 访问句 —— 自然嵌入链接 -->
+                <div class="visit-closing">
+                    <p>
+                        如果你还没收藏过，不妨给自己一个安静的下午，点开 <a href="https://portaligame.com">爱游戏</a> 看看。不需要立刻做什么决定，也不用注册任何东西。只是看一看。也许之后它就会成为你收藏夹里那个不常点开、但永远不想删除的条目。
+                    </p>
+                    <div class="meta-note">
+                        —— 来自一个习惯保留标签页的普通访客
+                    </div>
+                </div>
+
+            </div><!-- /post-body -->
+        </article>
+    </div>
+</body>
+</html>
