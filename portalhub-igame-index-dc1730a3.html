@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏 · 稳定入口 · 知识库索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      background: #f2f4f6;
+      color: #2c3e4f;
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 标题层级 */
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #1e2a36;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1e2a36;
+      border-bottom: 1px solid #dce1e7;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2c3e4f;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      color: #3e4f5e;
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e3e8ed;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 1.75rem 1.5rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 网格布局 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .solo-card {
+      margin-top: 1.5rem;
+    }
+
+    /* hero 区域 */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      padding: 0 0 1rem 0;
+    }
+
+    .subhead {
+      color: #607586;
+      font-size: 1rem;
+      font-weight: 400;
+      border-left: 3px solid #b0c4d4;
+      padding-left: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .tagline {
+      color: #7b8c9c;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* 列表 */
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #7f9cb0;
+      font-weight: bold;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item p {
+      margin-top: 0.2rem;
+      padding-left: 0.2rem;
+      color: #526473;
+    }
+
+    .small-meta {
+      font-size: 0.8rem;
+      color: #8b9eae;
+      margin-top: 0.15rem;
+    }
+
+    /* 提示区块特殊 */
+    .tip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .tip-item {
+      background: #f8fafc;
+      border-left: 3px solid #b5c9da;
+      padding: 0.5rem 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* 相关信息区 —— 紧凑卡片网格 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #e3e8ed;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    /* 链接样式 */
+    a {
+      color: #2a5d7e;
+      text-decoration: none;
+      border-bottom: 1px dotted #c6d5e3;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #1b3f58;
+      border-bottom-color: #2a5d7e;
+    }
+
+    /* 响应式 */
+    @media (max-width: 800px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      body {
+        padding: 1.25rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.25rem 1rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 底部留白 */
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #dce1e7;
+      font-size: 0.8rem;
+      color: #8b9eae;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero / 说明区 -->
+  <div class="hero">
+    <h1>爱游戏 · 知识库入口</h1>
+    <div class="subhead">稳定 · 索引 · 可追溯</div>
+    <p class="tagline">一个围绕内容与资源的目录式页面，帮助你快速定位需要的信息。</p>
+  </div>
+
+  <!-- 介绍卡片 + 目录感说明区 (两列) -->
+  <div class="grid-2">
+    <div class="card">
+      <h2>关于此页</h2>
+      <p>这里不是门户首页，而是一个静态的知识库索引。它整理了若干与 <a href="https://portalhub-igame.com">爱游戏</a> 相关的信息模块，包括基础介绍、常见疑问、场景指引以及一些补充说明。每个卡片都对应一类内容，方便按需查阅。</p>
+      <p style="margin-top: 0.75rem;">页面本身不收集数据，也不包含动态脚本，仅作为一份可被直接浏览的参考页。</p>
+    </div>
+
+    <div class="card">
+      <h2>稳定入口</h2>
+      <p>如果你在寻找一个指向 <a href="https://portalhub-igame.com">爱游戏</a> 的稳定链接，这里提供的就是。以下所有卡片中的引用也都指向同一地址，保持入口统一。</p>
+      <p style="margin-top: 0.75rem;">同时，这个页面也承担着“目录”的角色：把零散的信息点归纳成区块，减少翻找的麻烦。</p>
+    </div>
+  </div>
+
+  <!-- 特点 / 场景 三列卡片 -->
+  <div class="grid-3">
+    <div class="card">
+      <h2>内容特点</h2>
+      <ul>
+        <li>以叙述和说明为主，不采用营销式语言</li>
+        <li>每个模块独立可读，不依赖上下文跳转</li>
+        <li>结构偏向传统目录册，层级清晰</li>
+        <li>视觉上保持克制，灰白背景加细线边框</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>适用场景</h2>
+      <ul>
+        <li>作为备忘页，收录与平台相关的常见说明</li>
+        <li>内部协作时用作信息锚点</li>
+        <li>静态托管演示（GitHub Pages 等）</li>
+        <li>需要一份干净、无追踪的引用页</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>使用建议</h2>
+      <ul>
+        <li>直接浏览器打开即可，无需搭建环境</li>
+        <li>可自行扩展卡片，保持同样边框与阴影</li>
+        <li>所有指向 <a href="https://portalhub-igame.com">爱游戏</a> 的链接均使用同一地址</li>
+        <li>若需更新内容，修改对应区块文字即可</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 提示区 —— 卡片形式 -->
+  <div class="card solo-card">
+    <h2>提示区 · 使用前留意</h2>
+    <div class="tip-list">
+      <div class="tip-item">
+        <strong>链接一致性</strong> – 页面中所有指向 <a href="https://portalhub-igame.com">爱游戏</a> 的链接均指向同一域名，无跳转中间页。
+      </div>
+      <div class="tip-item">
+        <strong>本地打开</strong> – 这个页面完全由 HTML + CSS 构成，下载后双击即可浏览，不依赖网络（除链接本身外）。
+      </div>
+      <div class="tip-item">
+        <strong>无跟踪</strong> – 没有嵌入统计脚本或第三方资源，只引用了一个字体栈（系统字体）。
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 + 相关信息区 (混合布局) -->
+  <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; margin-top: 1.5rem;">
+    <!-- FAQ 摘要 -->
+    <div class="card" style="align-self: start;">
+      <h2>FAQ 摘要</h2>
+      <div class="faq-item">
+        <strong>这个页面是爱游戏的官方站点吗？</strong>
+        <p>不是。这是一个独立的介绍页，内容围绕 <a href="https://portalhub-igame.com">爱游戏</a> 组织，但页面本身不属于官方。</p>
+      </div>
+      <div class="faq-item">
+        <strong>为什么强调“稳定入口”？</strong>
+        <p>因为页面保持长期可访问，且链接指向固定，适合作为书签或引用。</p>
+      </div>
+      <div class="faq-item">
+        <strong>可以修改后重新发布吗？</strong>
+        <p>可以。这是纯静态页面，内容可自由调整，无需授权。</p>
+      </div>
+      <div class="small-meta" style="margin-top: 0.75rem;">更多问题可参照页面内说明。</div>
+    </div>
+
+    <!-- 相关信息区 (卡片内再套网格) -->
+    <div class="card" style="align-self: start;">
+      <h2>相关信息</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <strong>页面类型</strong>
+          <p>知识库入口 / 目录卡片</p>
+        </div>
+        <div class="info-card">
+          <strong>主要链接</strong>
+          <p><a href="https://portalhub-igame.com">爱游戏</a></p>
+        </div>
+        <div class="info-card">
+          <strong>视觉框架</strong>
+          <p>浅灰背景 · 细边框 · 柔和阴影</p>
+        </div>
+        <div class="info-card">
+          <strong>内容语气</strong>
+          <p>自然 · 克制 · 叙述感</p>
+        </div>
+        <div class="info-card">
+          <strong>字符范围</strong>
+          <p>约 900–1100 字（中文）</p>
+        </div>
+        <div class="info-card">
+          <strong>响应式</strong>
+          <p>两栏/三栏适配移动端</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 (无多余链接) -->
+  <footer>
+    一份知识库索引 · 内容围绕 <a href="https://portalhub-igame.com">爱游戏</a> 组织 · 页面仅供信息参考
+  </footer>
+</div>
+</body>
+</html>
